@@ -72,15 +72,18 @@
     <section class="abstract-section">
     <h2>Abstract</h2>
     <p class="abstract-text" style="line-height:1.28;margin:0;">
-      We introduce <strong>Time-to-Move (TTM)</strong>, a <strong>training-free</strong>, plug-and-play framework that adds precise motion control to existing video diffusion models.
-      While many prior methods require costly, model-specific fine-tuning, TTM requires no additional training or runtime cost and is compatible with any backbone.
-      Our key insight is to use <strong>crude reference animations</strong>—such as “cut-and-drag” or depth-based reprojection—as coarse motion cues.
-      Inspired by SDEdit, we adapt its mechanism to the video domain. 
-      
-      We preserve appearance with image conditioning and introduce <strong>dual-clock denoising</strong>, a novel region-dependent strategy that enforces strong alignment 
-      in motion-specified regions while allowing flexibility elsewhere, balancing fidelity to user intent with natural dynamics.
-      Moreover, compared to previous motion control methods, TTM enables joint control over both <strong>motion and appearance</strong>.
-      Experiments demonstrate that it achieves comparable or superior performance to training-based baselines in both realism and motion fidelity.
+      We introduce <strong>PRISM</strong>, a <strong>task-aware evaluation framework</strong> for Novel View Synthesis (NVS) designed to assess whether a generated view is not only realistic but also faithful to both the <em>source image</em> and the <em>intended viewpoint transformation</em>.
+      Despite major advances in diffusion-based NVS models, existing evaluation metrics often mis-rank incorrect results and overlook the geometric relationship between the source and target views, limiting their ability to reflect true synthesis quality.
+
+      Our key idea is to leverage <strong>viewpoint-aware diffusion features</strong> from the Zero123 family of models.
+      We enhance their discriminative power with a lightweight tuning step and introduce two complementary metrics:
+
+      <ul style="margin-top:0.3em;"> <li><strong>PRISM-D</strong>: a reference-based metric that evaluates fidelity to both the source view and the target viewpoint.</li> <li><strong>PRISM-MMD</strong>: a reference-free metric that measures consistency across viewpoints, enabling reliable benchmarking without ground truth.</li> </ul>
+
+      Together, these metrics reliably identify incorrect generations, produce <strong>stable model rankings</strong>, and show strong alignment with human preferences.
+      We evaluate six NVS methods across Toys4K, Google Scanned Objects (GSO), and OmniObject3D, where <strong>PRISM-MMD</strong> consistently yields clear, interpretable rankings, with lower scores corresponding to stronger models.
+
+      Our framework provides a principled and practical foundation for evaluating NVS quality, paving the way for more trustworthy progress in novel view synthesis.
     </p>
     </section>
 
