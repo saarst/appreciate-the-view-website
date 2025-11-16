@@ -709,3 +709,19 @@ section h2 {
   border-radius: 10px;
   box-shadow: var(--shadow);
 }
+
+
+.tldr-section {
+  max-width: 900px;
+  margin: 1.5rem auto 2rem auto;
+  padding: 1rem 1.25rem;
+  background: #eef6ff;
+  border-left: 4px solid #4a90e2;
+  border-radius: 4px;
+}
+
+.tldr {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.35;
+}
