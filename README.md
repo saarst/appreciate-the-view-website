@@ -1,3 +1,3 @@
-# Time‑to‑Move Project Page
+# Appreciate the View Project Page
 
-This repository contains the source code for the **Time‑to‑Move** project page, hosted at [https://time-to-move.github.io/](https://time-to-move.github.io/).
+Based on the source code of the **Time‑to‑Move** project page: [https://time-to-move.github.io/](https://time-to-move.github.io/).
