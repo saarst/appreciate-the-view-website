@@ -72,18 +72,11 @@
     <section class="abstract-section">
     <h2>Abstract</h2>
     <p class="abstract-text" style="line-height:1.28;margin:0;">
-      We introduce <strong>PRISM</strong>, a <strong>task-aware evaluation framework</strong> for Novel View Synthesis (NVS) designed to assess whether a generated view is not only realistic but also faithful to both the <em>source image</em> and the <em>intended viewpoint transformation</em>.
-      Despite major advances in diffusion-based NVS models, existing evaluation metrics often mis-rank incorrect results and overlook the geometric relationship between the source and target views, limiting their ability to reflect true synthesis quality.
+      We introduce <strong>PRISM</strong>, a task-aware evaluation framework for Novel View Synthesis (NVS) that measures whether a generated view is both realistic and faithful to the source image and intended viewpoint transformation. Although diffusion-based NVS models have improved in visual quality, existing metrics often mis-rank incorrect results because they ignore the geometric relationship between source and target views.
 
-      Our key idea is to leverage <strong>viewpoint-aware diffusion features</strong> from the Zero123 family of models.
-      We enhance their discriminative power with a lightweight tuning step and introduce two complementary metrics:
+      Our approach leverages viewpoint-aware diffusion features from Zero123 and refines them with a lightweight tuning step, enabling more discriminative and consistent evaluation. We introduce two complementary metrics—one reference-based and one reference-free—that reliably detect incorrect generations and produce stable model rankings aligned with human judgments. Across Toys4K, Google Scanned Objects, and OmniObject3D, our reference-free metric yields clear and meaningful comparisons, with lower scores consistently reflecting stronger NVS models.
 
-      <ul style="margin-top:0.3em;"> <li><strong>PRISM-D</strong>: a reference-based metric that evaluates fidelity to both the source view and the target viewpoint.</li> <li><strong>PRISM-MMD</strong>: a reference-free metric that measures consistency across viewpoints, enabling reliable benchmarking without ground truth.</li> </ul>
-
-      Together, these metrics reliably identify incorrect generations, produce <strong>stable model rankings</strong>, and show strong alignment with human preferences.
-      We evaluate six NVS methods across Toys4K, Google Scanned Objects (GSO), and OmniObject3D, where <strong>PRISM-MMD</strong> consistently yields clear, interpretable rankings, with lower scores corresponding to stronger models.
-
-      Our framework provides a principled and practical foundation for evaluating NVS quality, paving the way for more trustworthy progress in novel view synthesis.
+      PRISM provides a principled and practical foundation for evaluating NVS quality and supports more trustworthy progress in novel view synthesis.
     </p>
     </section>
 
@@ -91,15 +84,18 @@
     <section class="method-section">
       <h2>Method Overview</h2>
       <div class="method-figure">
-        <img src="assets/method_figure_v9.png" alt="Method Overview" class="method-img">
+        <img src="assets/method_figure.png" alt="Method Overview" class="method-img">
       </div>
       
       <div class="method-description" style="line-height:1.28;margin:0;">
         <p>
-        Time-to-Move (TTM) takes an input image and a user-specified motion, then automatically builds <strong>(i)</strong> a coarse warped reference video and <strong>(ii)</strong> a mask marking the controlled region.
-        The image-to-video diffusion model is conditioned on the clean input image and initialized from a noisy version of the warped reference, anchoring appearance while injecting the intended motion.
-        During sampling, dual-clock denoising is applied: lower noise inside the mask to enforce the commanded motion, higher noise elsewhere to enable it to evolve naturally.
-        The result is a realistic video that preserves input details and faithfully follows the motion without extra training or architectural changes.
+          Appreciate the View introduces PRISM, a feature-based evaluation method tailored to novel view synthesis. 
+          Our approach embeds the source image, the generated target view, and the intended viewpoint transformation 
+          using pose-aware diffusion features from a strong NVS backbone. A lightweight tuning step sharpens these 
+          features so they reflect whether the output is consistent with the source–target geometry. 
+          From this representation, we derive both a reference-based score and a reference-free score that quantify 
+          synthesis quality in a stable, viewpoint-aware manner. This allows PRISM to distinguish plausible views 
+          from incorrect ones and to produce model rankings that closely align with human judgments.
         </p>
       </div>
       
