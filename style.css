@@ -693,3 +693,19 @@ section h2 {
 }
 
 .paper-header + .teaser-section { margin-top: -2em; }
+
+
+/* Teaser Image Fix */
+.teaser-image-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.teaser-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
