@@ -125,6 +125,50 @@
       </div>
     </section>
 
+    <section class="results-section">
+      <h2>Correlation with Human Judgments</h2>
+      <p class="section-description" style="line-height:1.28;margin:0;">
+        We evaluate how well various metrics align with human preferences across four aspects of 
+        novel view synthesis: <em>Viewpoint Accuracy</em>, <em>Shared Consistency</em>, 
+        <em>Plausibility of New Regions</em>, and <em>Image Quality</em>. 
+        Classical pixel- or distribution-based scores show weak or even negative correlation, 
+        highlighting their inability to assess viewpoint-aware correctness.  
+        In contrast, <strong>D<sub>PRISM</sub></strong> achieves the strongest alignment with human 
+        judgments across all criteria, demonstrating that PRISM captures the geometric and 
+        perceptual relationships that humans use to evaluate NVS realism.
+      </p>
+
+      <div style="overflow-x:auto; margin-top:1.5rem;">
+        <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+          <thead style="background:#f0f2f5; border-bottom:2px solid #ccc;">
+            <tr>
+              <th style="padding:8px; text-align:left;">Metric</th>
+              <th style="padding:8px; text-align:center;">VP</th>
+              <th style="padding:8px; text-align:center;">SC</th>
+              <th style="padding:8px; text-align:center;">PL</th>
+              <th style="padding:8px; text-align:center;">IQ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:8px;">PSNR</td><td style="text-align:center;">0.071</td><td style="text-align:center;">0.007</td><td style="text-align:center;">-0.187</td><td style="text-align:center;">-0.323</td></tr>
+            <tr><td style="padding:8px;">SSIM</td><td style="text-align:center;"><strong>0.279</strong></td><td style="text-align:center;">0.270</td><td style="text-align:center;">0.114</td><td style="text-align:center;">-0.117</td></tr>
+            <tr><td style="padding:8px;">LPIPS</td><td style="text-align:center;">0.071</td><td style="text-align:center;">0.056</td><td style="text-align:center;">-0.035</td><td style="text-align:center;">-0.251</td></tr>
+            <tr><td style="padding:8px;">MEt3R</td><td style="text-align:center;">-0.028</td><td style="text-align:center;">-0.016</td><td style="text-align:center;">0.179</td><td style="text-align:center;">0.080</td></tr>
+            <tr><td style="padding:8px;">CLIP-S w/ GT</td><td style="text-align:center;">-0.330</td><td style="text-align:center;">0.107</td><td style="text-align:center;">-0.084</td><td style="text-align:center;">0.019</td></tr>
+            <tr><td style="padding:8px;">CLIP-S w/ src</td><td style="text-align:center;">-0.012</td><td style="text-align:center;">-0.048</td><td style="text-align:center;">-0.034</td><td style="text-align:center;">-0.008</td></tr>
+            <tr style="background:#eaf6ff;">
+              <td style="padding:8px;"><strong>D<sub>PRISM</sub> (Ours)</strong></td>
+              <td style="text-align:center;"><strong>0.223</strong></td>
+              <td style="text-align:center;"><strong>0.352</strong></td>
+              <td style="text-align:center;"><strong>0.205</strong></td>
+              <td style="text-align:center;"><strong>0.394</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
 
     <!-- BibTeX -->
     <section class="bibtex-section">
