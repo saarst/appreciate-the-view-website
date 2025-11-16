@@ -124,28 +124,6 @@
     </section>
 
 
-    <!-- Dual-Clock Denoising -->
-    <section class="dual-clock-section">
-      <h2>Dual-Clock Denoising</h2>
-      <div class="dual-clock-figure">
-        <div class="dual-clock-video-container">
-          <video class="dual-clock-video" autoplay loop muted playsinline controls>
-            <source src="assets/dual_clock_video_2_720p_lightweight.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-      <div class="dual-clock-description" style="line-height:1.28;margin:0;">
-        <p>
-        We present a region-dependent denoising strategy.
-        Previous methods have limitations: SDEdit either suppresses dynamics in unmasked regions (at low noise levels) or drifts from the prescribed motion (at high levels). 
-        RePaint, on the other hand, enforces motion by overriding the foreground, but often introduces artifacts in uncontrolled regions and rigid motion in controlled regions.
-        We propose a dual-clock method where masked regions follow the intended motion with strong fidelity, while the rest of the scene denoises more freely.
-        This flexible approach yields realistic dynamics without artifacts.
-      </p>
-      </div>
-    </section>
-
     <!-- User-Specified Object Control (plays 81 frames @ 24 fps) -->
     <section id="UserObjectControl" class="results-section">
       <h2>Object Motion Control</h2>
