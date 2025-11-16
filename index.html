@@ -109,304 +109,32 @@
         <img src="assets/dataset_creation.png" alt="Dataset Creation Pipeline" class="method-img">
       </div>
 
-      <p class="section-description" style="line-height:1.28;margin:0;">
-        To train PRISM’s lightweight tuning module, we construct pairs of source and target views 
-        using the ViewMatch protocol. Given an object rendered from multiple viewpoints, we form 
-        <em>positive pairs</em> by selecting two views with a small, known change in azimuth, and 
-        <em>negative pairs</em> by selecting views with large viewpoint differences. 
-        Each pair is encoded using Zero123 features together with the corresponding relative pose. 
-        This yields a compact, pose-aware dataset that captures how real viewpoint changes affect 
-        feature geometry, enabling PRISM to distinguish plausible view transformations from 
-        inconsistent or unrealistic generations.
-      </p>
-      </div>
-
-    </section>
-
-
-    <!-- User-Specified Object Control (plays 81 frames @ 24 fps) -->
-    <section id="UserObjectControl" class="results-section">
-      <h2>Object Motion Control</h2>
-      <p class="section-description" style="line-height:1.28;margin:0;">
-        Examples of user-specified object control. The user selects one or more regions of interest in an image using a mask and defines their trajectories. 
-        The masked regions are then dragged across all frames to produce a coarse, warped version of the intended object animation. 
-        Finally, <strong>TTM</strong>, integrated with the Wan&nbsp;2.2 video model, generates a high-quality, dynamic video that accurately reflects the user’s intent.
-      </p>
-      <br>
-      <div class="video-grid-2col">
-        <!-- Header row: two header cells, one per column -->
-        <div class="video-col-headercell">
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Warped</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours</span>
-          <span class="spacer" aria-hidden="true"></span>
-        <span style="display:block;height:calc(1em * 1.28 * 0.45)" aria-hidden="true"></span>
-        </div>
-        <div class="video-col-headercell">
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Warped</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span style="display:block;height:calc(1em * 1.28 * 0.45)" aria-hidden="true"></span>
-        </div>
-        <!-- <div class="video-item">
-          <video src="UserObjectControl/monkeyjumpingonthebed_concatenated_fixed.mp4" autoplay loop muted playsinline controls></video>
-        </div> -->
-        <div class="video-item">
-            <video src="UserObjectControl/jumping_concatenated_fixed.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="video-item">
-            <video src="UserObjectControl/gardening_concatenated_fixed.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="video-item">
-          <video src="UserObjectControl/girljuggling_concatenated_fixed.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="video-item">
-          <video src="UserObjectControl/timesquaresv5_concatenated_fixed_960x320_optimized.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="video-item">
-          <video src="UserObjectControl/Vines_concat_960x320_optimized.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="video-item">
-          <video src="UserObjectControl/Rhino_concat_960x320_optimized.mp4" autoplay loop muted playsinline controls></video>
-          <p class="video-label">Warped | Ours</p>
-        </div>
-        <div class="video-item">
-          <video src="UserObjectControl/Turtle_concat2_960x320_optimized.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="video-item">
-          <video src="UserObjectControl/splash_knight_concat_960x320_optimized.mp4" autoplay loop muted playsinline controls></video>
-        </div>
+      <div class="section-description" style="line-height:1.6; margin-top:1rem;">
+        <p>
+          Overview of our <strong>VIEWMATCH</strong> dataset creation process.  
+          From a 3D mesh and a pair of source–target viewpoints, we first compute
+          <em>visibility</em> and <em>invisibility</em> masks of the target view by identifying
+          which target-view faces are visible from the source.  
+          We also derive an <em>epipolar invisibility mask</em> that marks regions beyond the
+          object that cannot be seen from the source viewpoint.  
+          These masks are then combined and augmented to allow for controlled shape
+          changes, and the resulting masks—together with the ground-truth target view—are
+          used as inputs to an inpainting model to generate positive and negative examples
+          for training.
+        </p>
       </div>
     </section>
 
-
-    <!-- User-Specified Camera Control (plays 81 frames @ 16 fps) -->
-    <section id="UserCameraControl" class="results-section">
-      <h2>Camera Motion Control</h2>
-      <p class="section-description" style="line-height:1.28;margin:0;">
-        Examples of user-specified camera control from a single image. From any input image, we first estimate its depth and, given a user-defined camera trajectory, generate a warped video of the original frame as viewed from each new viewpoint. 
-        Any resulting holes are filled using nearest-neighbor colors, producing a coarse initial video that approximates the desired camera motion. 
-        Finally, <strong>TTM</strong> synthesizes a realistic video that accurately follows the specified camera path.
-      </p>
-      <br>
-      <div class="video-grid-2col">
-                <div class="video-col-headercell">
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Warped</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours</span>
-          <span class="spacer" aria-hidden="true"></span>
-        <span style="display:block;height:calc(1em * 1.28 * 0.45)" aria-hidden="true"></span>
-        </div>
-        <div class="video-col-headercell">
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Warped</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span style="display:block;height:calc(1em * 1.28 * 0.45)" aria-hidden="true"></span>
-        </div>
-        <div class="video-item">
-            <video src="UserCameraControl/volcano_concatenated_fixed.mp4" autoplay loop muted playsinline controls></video>
-            <p class="video-label">Warped | Ours</p>
-        </div>
-        <div class="video-item">
-          <video src="UserCameraControl/Bridge2_concat_3.mp4" autoplay loop muted playsinline controls></video>
-          <p class="video-label">Warped | Ours</p>
-        </div>
-        <div class="video-item">
-            <video src="UserCameraControl/riverup_concatenated_fixed.mp4" autoplay loop muted playsinline controls></video>
-            <p class="video-label">Warped | Ours</p>
-        </div>
-        <div class="video-item">
-            <video src="UserCameraControl/volcanotitan_concatenated_fixed.mp4" autoplay loop muted playsinline controls></video>
-            <p class="video-label">Warped | Ours</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- User-Specified Camera Control (plays 81 frames @ 24 fps) -->
-    <section id="UserObjectAppearanceControl" class="results-section">
-      <h2>Motion and Appearance Control</h2>
-    <p class="section-description" style="line-height:1.28;margin:0;">
-      Examples of user-specified object and appearance control. 
-      Our method enables both the insertion of new objects from outside the original image and the modification of an existing object’s appearance, such as changing its color or shape. 
-      Accordingly, a coarse, warped version of the intended object animation—including the desired appearance changes—is first generated and then fed into a <strong>TTM</strong>-based model that synthesizes the output video.
-    </p>
-    <br>
-      <div class="video-grid-2col">
-        <div class="video-col-headercell">
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Warped</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours</span>
-          <span class="spacer" aria-hidden="true"></span>
-        <span style="display:block;height:calc(1em * 1.28 * 0.45)" aria-hidden="true"></span>
-        </div>
-        <div class="video-col-headercell">
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Warped</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span style="display:block;height:calc(1em * 1.28 * 0.45)" aria-hidden="true"></span>
-        </div>
-        <div class="video-item">
-            <video src="UserObjectAppearanceControl/TimeToMoveVideo_concat_4_960x320_optimized.mp4" autoplay loop muted playsinline controls></video>
-            <p class="video-label">Warped | Ours</p>
-        </div>
-        <div class="video-item">
-          <video src="UserObjectAppearanceControl/cocktail2_concatenated_fixed.mp4" autoplay loop muted playsinline controls></video>
-          <p class="video-label">Warped | Ours</p>
-        </div>
-        <div class="video-item">
-            <video src="UserObjectAppearanceControl/puttingonahat_concatenated_fixed.mp4" autoplay loop muted playsinline controls></video>
-            <p class="video-label">Warped | Ours</p>
-        </div>
-        <div class="video-item">
-          <video src="UserObjectAppearanceControl/Sunset_concat_960x320_optimized.mp4" autoplay loop muted playsinline controls></video>
-          <p class="video-label">Warped | Ours</p>
-        </div>
-        <div class="video-item">
-          <video src="UserObjectAppearanceControl/RaceCars_concat_960x320_optimized.mp4" autoplay loop muted playsinline controls></video>
-          <p class="video-label">Warped | Ours</p>
-        </div>
-        <div class="video-item">
-          <video src="UserObjectAppearanceControl/ChameleonFade_concat_960x320_optimized.mp4" autoplay loop muted playsinline controls></video>
-          <p class="video-label">Warped | Ours</p>
-        </div>
-        <!-- <div class="video-item">
-            <video src="UserObjectAppearanceControl/ChameleonColor_concat.mp4" autoplay loop muted playsinline controls></video>
-            <p class="video-label">Warped | Ours</p>
-        </div> -->
-        <!-- <div class="video-item">
-            <video src="UserObjectAppearanceControl/concat_motion_left_fps=24.mp4" autoplay loop muted playsinline controls></video>
-            <p class="video-label">Warped | Ours</p>
-        </div> -->
-      </div>
-    </section>
-
-
-    <!-- Qualitative Comparison - Object Control (plays 81 frames @ 24 fps)  -->
-    <section class="comparison-section">
-      <h2>Qualitative Comparison: Object Control</h2>
-      <p class="section-description" style="line-height:1.28;margin:0;">
-    Comparison of our method with the <strong>training-based</strong> state-of-the-art approach Go-with-the-Flow (GWTF) <a href="#ref1">[1]</a> on user-specified object control tasks.
-      </p>
-      <!-- Videos - Hamburger, Snooker, Find Other -->
-      <div class="comparison-grid">
-        <div class="video-col-headercell-small">
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Warped</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours (Wan2.2)</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours (CogVideoX)</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">GWTF</span>
-          <span class="spacer" aria-hidden="true"></span>
-        <span style="display:block;height:calc(1em * 1.28 * 0.45)" aria-hidden="true"></span>
-        </div>
-        <div class="video-col-headercell-small">
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Warped</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours (Wan2.2)</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours (CogVideoX)</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">GWTF</span>
-          <span class="spacer" aria-hidden="true"></span>
-        <span style="display:block;height:calc(1em * 1.28 * 0.45)" aria-hidden="true"></span>
-        </div>
-        <div class="comparison-item">
-          <video src="UserObjectControl_Comparison/Hamburger_concat.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="comparison-item">
-          <video src="UserObjectControl_Comparison/Snooker_concat.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="comparison-item">
-          <video src="UserObjectControl_Comparison/BillboardUnrolling_concat.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="comparison-item">
-          <video src="UserObjectControl_Comparison/CuttingCucumber_concat.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="comparison-item">
-          <video src="UserObjectControl_Comparison/Surfing_concat.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="comparison-item">
-          <video src="UserObjectControl_Comparison/CarHighway_concat.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-      </div>
-    </section>
-
-    <!-- Qualitative Comparison - Camera Control (plays 81 frames @ 16 fps) -->
-    <section class="comparison-section">
-      <h2>Qualitative Comparison: Camera Control</h2>
-      <p class="section-description" style="line-height:1.28;margin:0;">
-        Comparison of our method on user-specified camera control tasks.
-      </p>
-
-      <div class="comparison-grid">
-        <div class="video-col-headercell-small">
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Warped</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours (Wan2.2)</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours (CogVideoX)</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">GWTF</span>
-          <span class="spacer" aria-hidden="true"></span>
-        <span style="display:block;height:calc(1em * 1.28 * 0.45)" aria-hidden="true"></span>
-        </div>
-        <div class="video-col-headercell-small">
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Warped</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours (Wan2.2)</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">Ours (CogVideoX)</span>
-          <span class="spacer" aria-hidden="true"></span>
-          <span class="label">GWTF</span>
-          <span class="spacer" aria-hidden="true"></span>
-        <span style="display:block;height:calc(1em * 1.28 * 0.45)" aria-hidden="true"></span>
-        </div>
-        <div class="comparison-item">
-          <video src="UserCameraControl_Comparison/RiverOcean_concat.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="comparison-item">
-          <video src="UserCameraControl_Comparison/SpiderMan_concat.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-      </div>
-    </section>
 
     <!-- BibTeX -->
     <section class="bibtex-section">
       <h2>Citation</h2>
       <pre class="bibtex"><code>
-      @misc{singer2025timetomovetrainingfreemotioncontrolled,
-            title={Time-to-Move: Training-Free Motion Controlled Video Generation via Dual-Clock Denoising}, 
-            author={Assaf Singer and Noam Rotstein and Amir Mann and Ron Kimmel and Or Litany},
-            year={2025},
-            eprint={2511.08633},
-            archivePrefix={arXiv},
-            primaryClass={cs.CV},
-            url={https://arxiv.org/abs/2511.08633}, 
-      }
-</code></pre>
+      TBD
+      </code></pre>
     </section>
 
-    <!-- References Section -->
+    <!-- References Section
       <section class="references-section">
         <h2>References</h2>
         <ol class="references-list">
@@ -416,19 +144,20 @@
             <span class="ref-venue">CVPR 2025</span>.
           </li>
           <!-- Add more references as needed -->
-        </ol>
-      </section>
+        <!-- </ol> -->
+      <!-- </section> --> -->
 
     <!-- Footer (with Copyright & License Section) -->
     <footer class="page-footer">
-    <p>
-      © 2025 <a href="https://www.linkedin.com/in/assaf-singer/">Assaf Singer</a>, 
-      <a href="https://www.linkedin.com/in/amir-mann-a890bb276/">Amir Mann</a>, and contributors. <br>
-      You are welcome to reuse or adapt this website’s 
-      <a href="https://github.com/time-to-move/time-to-move.github.io">source code</a> 
-      under the terms of the MIT License. <br>
-      We kindly ask that you include a link back to this page if you use it in your project.
+      <p>
+        © 2025 <a href="https://www.linkedin.com/in/saar-stern/">Saar Stern</a> and contributors.<br>
+        This project page adapts the 
+        <a href="https://github.com/time-to-move/time-to-move.github.io">Time-to-Move</a> 
+        website template under the MIT License. <br>
+        If you reuse or modify this page, please include a reference to the original template.
+      </p>
     </footer>
+
     
   </div>
 </body>
