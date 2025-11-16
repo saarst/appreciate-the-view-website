@@ -101,6 +101,29 @@
       
       </section>
 
+    <!-- Dataset Creation -->
+    <section class="dual-clock-section">
+      <h2>Dataset Creation</h2>
+
+      <div class="method-figure">
+        <img src="assets/dataset_creation.png" alt="Dataset Creation Pipeline" class="method-img">
+      </div>
+
+      <p class="section-description" style="line-height:1.28;margin:0;">
+        To train PRISM’s lightweight tuning module, we construct pairs of source and target views 
+        using the ViewMatch protocol. Given an object rendered from multiple viewpoints, we form 
+        <em>positive pairs</em> by selecting two views with a small, known change in azimuth, and 
+        <em>negative pairs</em> by selecting views with large viewpoint differences. 
+        Each pair is encoded using Zero123 features together with the corresponding relative pose. 
+        This yields a compact, pose-aware dataset that captures how real viewpoint changes affect 
+        feature geometry, enabling PRISM to distinguish plausible view transformations from 
+        inconsistent or unrealistic generations.
+      </p>
+      </div>
+
+    </section>
+
+
     <!-- Dual-Clock Denoising -->
     <section class="dual-clock-section">
       <h2>Dual-Clock Denoising</h2>
